@@ -1,0 +1,6 @@
+apiVersion: v2
+name: todo.task-service
+description: A Helm chart for deploying todo.task-service API
+type: application
+version: 0.1.0
+appVersion: "1.0"
