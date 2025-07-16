@@ -22,7 +22,7 @@ public class TaskListController : ControllerBase
         => _taskListManager.DeleteAsync(listId);
 
     [HttpGet("{listId}")]
-    public Task<TaskList?> FindAsync(Guid listId)
+    public Task<TaskList> FindAsync(Guid listId)
         => _taskListManager.FindAsync(listId);
 
     [HttpGet()]
