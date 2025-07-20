@@ -6,9 +6,9 @@ ARG GITHUB_TOKEN
 WORKDIR /app
 
 RUN apt-get update \
-    && apt-get install -y unzip curl \
-    && mkdir -p /vsdbg \
-    && curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg
+  && apt-get install -y unzip curl \
+  && mkdir -p /vsdbg \
+  && curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg
 
 WORKDIR /src
 COPY src .
@@ -34,5 +34,6 @@ EOF
 RUN dotnet restore --configfile /src/API/nuget.config
 
 EXPOSE 8080
+EXPOSE 5000
 
-CMD ["dotnet", "watch", "run", "--no-launch-profile", "--urls=http://0.0.0.0:8080"]
+CMD ["dotnet", "watch", "run", "--no-launch-profile", "--urls=http://0.0.0.0:8080;http://0.0.0.0:5000"]

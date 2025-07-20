@@ -2,12 +2,17 @@ using Data;
 using Managers;
 using Services.Common.Identity;
 using API.Common.Middlewares;
+using API.Configurations;
+using Grpc;
+
 
 internal class Program
 {
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        builder.WebHost.ConfigurePorts();
 
         string JWT_ISSUER = builder.Configuration.GetValue<string>(nameof(JWT_ISSUER))!;
         string JWT_AUDIENCE = builder.Configuration.GetValue<string>(nameof(JWT_AUDIENCE))!;
@@ -21,6 +26,7 @@ internal class Program
         builder.Services.AddManagers();
         builder.Services.AddControllers()
             .AddCamelCaseJson();
+        builder.Services.AddGrpcServices();
 
         builder.Services.AddAuthConfiguration(JWT_ISSUER, JWT_AUDIENCE, JWT_KEY);
 
@@ -30,6 +36,7 @@ internal class Program
         app.UseAuth();
 
         app.MapControllers();
+        app.MapGrpcServices();
 
         app.Run();
     }

@@ -11,7 +11,7 @@ public static class TaskListEx
         dest.Description = src.Description;
 
         if (userId.HasValue)
-            dest.UserId = userId.Value;
+            dest.CreatedBy = userId.Value;
 
         return dest;
     }

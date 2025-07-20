@@ -10,6 +10,7 @@ namespace Managers
         {
             services.AddScoped<ITaskListManager, TaskListManager>();
             services.AddScoped<ITaskItemManager, TaskItemManager>();
+            services.AddScoped<ITaskLogManager, TaskItemLogManager>();
 
             return services;
         }
