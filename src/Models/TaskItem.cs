@@ -6,5 +6,7 @@ public record TaskItem
     public string Title { get; set; } = string.Empty;
     public bool IsCompleted { get; set; } = false;
 
+    public DateTime CreatedAtUtc { get; set; }
+
     public Guid TaskListId { get; set; }
 }

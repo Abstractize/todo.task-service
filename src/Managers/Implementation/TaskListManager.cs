@@ -18,7 +18,7 @@ internal class TaskListManager(ITaskListRepository repository, IIdentityService 
         Guid? userId = _identityService.UserId ??
             throw new UnauthorizedException("User is not authenticated.");
 
-        IEnumerable<Entities.TaskList> lists = await _repository.GetAsync(x => x.UserId == userId);
+        IEnumerable<Entities.TaskList> lists = await _repository.GetAsync(x => x.CreatedBy == userId);
 
         return lists.Select(x => new TaskList().LoadFrom(x));
     }

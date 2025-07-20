@@ -12,8 +12,8 @@
     <PackageReference Include="ToDoApp.API.Common" Version="1.0.0" />
   </ItemGroup>
 
-
   <ItemGroup>
+    <ProjectReference Include="..\Grpc\Grpc.csproj" />
     <ProjectReference Include="..\Managers\Managers.csproj" />
   </ItemGroup>
 

@@ -15,7 +15,7 @@ public static partial class ModelBuilderEx
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(t => t.UserId)
+            builder.Property(t => t.CreatedBy)
                 .IsRequired();
 
             builder.Property(t => t.CreatedAt)
@@ -26,7 +26,7 @@ public static partial class ModelBuilderEx
                 .HasForeignKey(t => t.TaskListId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasIndex(t => t.UserId)
+            builder.HasIndex(t => t.CreatedBy)
                 .HasDatabaseName("IX_TaskList_UserId")
                 .IsUnique(false);
 
