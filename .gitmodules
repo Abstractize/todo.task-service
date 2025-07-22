@@ -1,3 +1,3 @@
-[submodule "src/Grpc/Protos"]
+[submodule "src/Grpc/todo.protos"]
 	path = src/Grpc/Protos
 	url = https://github.com/Abstractize/todo.protos
