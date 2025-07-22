@@ -32,6 +32,8 @@ public class TasksGrpcService(ITaskItemManager taskItemManager, ITaskLogManager 
         Guid userId = Guid.Parse(request.UserId);
         DateTime weekStart = DateTime.Parse(request.WeekStartDateUtc);
 
+        Console.WriteLine($"Fetching tasks for user {userId} starting from week beginning {weekStart.ToUniversalTime().ToString("o")}");
+
         IEnumerable<Models.TaskItem> tasks = await _taskItemManager.GetWeeklyTasksAsync(userId, weekStart);
 
         TaskList taskList = new()
@@ -45,9 +47,14 @@ public class TasksGrpcService(ITaskItemManager taskItemManager, ITaskLogManager 
                     CreatedAt = t.CreatedAtUtc.ToUniversalTime().ToString("o") // ISO 8601 format
                 }).ToList()
             },
-            FirstActivity = (await _taskLogManager.GetFirstActivityAsync(userId)).ExecutionAt.ToUniversalTime().ToString("o"),
-            LastActivity = (await _taskLogManager.GetLastActivityAsync(userId)).ExecutionAt.ToUniversalTime().ToString("o")
+            FirstActivity = (await _taskLogManager.GetFirstActivityAsync(userId)).ExecutionAtUtc.ToUniversalTime().ToString("o"),
+            LastActivity = (await _taskLogManager.GetLastActivityAsync(userId)).ExecutionAtUtc.ToUniversalTime().ToString("o")
         };
+
+        foreach (var task in taskList.Tasks)
+        {
+            Console.WriteLine($"Task ID: {task.Id}, Title: {task.Title}, Completed: {task.IsCompleted}, Created At: {task.CreatedAt}");
+        }
 
         return taskList;
     }

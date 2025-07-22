@@ -24,7 +24,7 @@ public static class TaskItemEx
         dest.Title = src.Title;
         dest.IsCompleted = src.IsCompleted;
 
-        dest.CreatedAtUtc = src.CreatedAtUtc.ToUniversalTime();
+        dest.CreatedAtUtc = src.CreatedAtUtc;
 
         dest.TaskListId = src.TaskListId;
 
