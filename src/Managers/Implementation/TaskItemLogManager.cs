@@ -16,7 +16,7 @@ public class TaskItemLogManager(ITaskItemRepository repository) : ITaskLogManage
         return new TaskItemLog
         {
             Action = LogAction.Created,
-            ExecutionAt = taskItem?.CreatedAtUtc ?? DateTime.UtcNow
+            ExecutionAtUtc = taskItem?.CreatedAtUtc ?? DateTime.UtcNow
         };
     }
 
@@ -28,7 +28,7 @@ public class TaskItemLogManager(ITaskItemRepository repository) : ITaskLogManage
         return new TaskItemLog
         {
             Action = LogAction.Updated,
-            ExecutionAt = taskItem?.UpdatedAtUtc ?? DateTime.UtcNow
+            ExecutionAtUtc = taskItem?.UpdatedAtUtc ?? DateTime.UtcNow
         };
     }
 }

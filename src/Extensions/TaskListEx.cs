@@ -19,6 +19,7 @@ public static class TaskListEx
     public static TaskList LoadFrom(this TaskList dest, Entities.TaskList src)
     {
         dest.Id = src.Id;
+
         dest.Title = src.Title;
         dest.Description = src.Description;
 

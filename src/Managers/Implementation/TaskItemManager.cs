@@ -16,7 +16,7 @@ internal class TaskItemManager(ITaskItemRepository repository, IIdentityService 
     public async Task<IEnumerable<TaskItem>> GetByTaskListAsync(Guid taskListId)
     {
         IEnumerable<Entities.TaskItem> items = await _repository
-            .GetAsync(x => x.TaskListId == taskListId && !x.IsCompleted);
+            .GetAsync(x => x.TaskListId == taskListId && !x.CompletedAtUtc.HasValue);
 
         return items
             .OrderByDescending(x => x.CreatedAtUtc)

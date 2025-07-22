@@ -18,7 +18,7 @@ public static partial class ModelBuilderEx
             builder.Property(t => t.CreatedBy)
                 .IsRequired();
 
-            builder.Property(t => t.CreatedAt)
+            builder.Property(t => t.CreatedAtUtc)
                 .IsRequired();
 
             builder.HasMany(t => t.Tasks)

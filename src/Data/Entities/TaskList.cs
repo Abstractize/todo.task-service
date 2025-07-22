@@ -8,7 +8,7 @@ public class TaskList
     public string Description { get; set; } = string.Empty;
 
     public Guid CreatedBy { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
 
     public ICollection<TaskItem> Tasks { get; set; } = [];
 }
