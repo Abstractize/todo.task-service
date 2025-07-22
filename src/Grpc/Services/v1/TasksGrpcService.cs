@@ -1,9 +1,11 @@
 using Grpc.Core;
 using Analytics.Protos;
 using Managers.Contracts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Grpc.Services.v1;
 
+[Authorize]
 public class TasksGrpcService(ITaskItemManager taskItemManager, ITaskLogManager taskLogManager) : TaskAnalyticsService.TaskAnalyticsServiceBase
 {
     private readonly ITaskItemManager _taskItemManager = taskItemManager;
