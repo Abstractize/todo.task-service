@@ -3,6 +3,7 @@ using Analytics.Protos;
 using Managers.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Services.Common.Identity;
+using System.Globalization;
 
 namespace Grpc.Services.v1;
 
@@ -32,11 +33,14 @@ public class TasksGrpcService(ITaskItemManager taskItemManager, ITaskLogManager 
 
     public override async Task<TaskList> GetUserTasksOfWeek(GetWeeklyTasksRequest request, ServerCallContext context)
     {
+        Console.WriteLine($"==> {_identityService.UserId} requested weekly tasks for {request.DayUtc}");
         Guid userId = _identityService.UserId ??
             throw new RpcException(new Status(StatusCode.Unauthenticated, "User is not authenticated"));
-        DateTime weekStart = DateTime.Parse(request.DayUtc);
+        DateTime weekStartUtc = DateTime.Parse(request.DayUtc, null, DateTimeStyles.RoundtripKind);
 
-        IEnumerable<Models.TaskItem> tasks = await _taskItemManager.GetWeeklyTasksAsync(userId, weekStart);
+        Console.WriteLine($"==> Parsed to Week Start: {weekStartUtc.Kind} {weekStartUtc.ToString("o", CultureInfo.InvariantCulture)}");
+
+        IEnumerable<Models.TaskItem> tasks = await _taskItemManager.GetWeeklyTasksAsync(userId, weekStartUtc);
 
         TaskList taskList = new()
         {

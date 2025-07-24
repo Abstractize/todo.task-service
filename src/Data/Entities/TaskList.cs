@@ -1,14 +1,11 @@
+using Data.Common.Entity;
+
 namespace Data.Entities;
 
-public class TaskList
+public class TaskList : AuditableEntity
 {
-    public Guid Id { get; set; }
-
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-
-    public Guid CreatedBy { get; set; }
-    public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
 
     public ICollection<TaskItem> Tasks { get; set; } = [];
 }
