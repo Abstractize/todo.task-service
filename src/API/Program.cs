@@ -38,6 +38,8 @@ internal class Program
         app.MapControllers();
         app.MapGrpcServices();
 
+        app.MigrateAtStartup(SQL_CONNECTION_STRING is not null);
+
         app.Run();
     }
 }

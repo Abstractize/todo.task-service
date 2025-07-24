@@ -1,7 +1,9 @@
-﻿using Data.Context;
+﻿using Data.Common.Extensions;
+using Data.Context;
 using Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Data
 {
@@ -13,6 +15,12 @@ namespace Data
             services.AddRepositories();
 
             return services;
+        }
+
+        public static void MigrateAtStartup(this IHost host, bool applyMigrations = true)
+        {
+            if (applyMigrations)
+                host.ApplyMigrations<DatabaseContext>();
         }
 
         private static IServiceCollection AddDatabaseContext(this IServiceCollection services, string? connectionString = null)

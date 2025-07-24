@@ -17,6 +17,7 @@ public static partial class ModelBuilderEx
 
             builder.Property(t => t.CompletedBy)
                 .IsRequired(false);
+
             builder.Property(t => t.CompletedAtUtc)
                 .IsRequired(false);
 
