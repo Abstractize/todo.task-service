@@ -18,6 +18,8 @@ namespace Data.Context
         {
             modelBuilder.BuildTaskListModel();
             modelBuilder.BuildTaskItemModel();
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
